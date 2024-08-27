@@ -1,4 +1,4 @@
-export const datajs = [
+export const dataJs = [
     {
         pregunta: '¿Qué método se usa para agregar un elemento al final de un array en JavaScript?',
         opciones: ['push()', 'pop()', 'shift()', 'unshift()'],

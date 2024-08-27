@@ -1,85 +1,103 @@
-import { datajs } from "../../javascript/data/data-javascript";
 
+// variables de control
 let contador = 0
-let score = 0
+let puntuacion = 0
+let total = 0
+let preguntas = []
 
+// contenedores donde se mostrará el contenido del quiz
 const btnNext = document.querySelector("#btn-next")    
 const totalText = document.querySelector('.n-preguntas')
+const opcionesBox = document.querySelector(".options-list")
 
-// agregando un event listener
 
+// agregando un event listener al boton siguiente
 btnNext.addEventListener('click', ()=>{
     // verificar que se muestren la cantidad de preguntas que existen en el quiz
-    if(contador < datajs.length - 1){
+    if(contador < total - 1){
         contador++;
-        mostrarPregunta(contador)
+        mostrarPregunta(contador, preguntas)
     } else{
-        console.log('Quiz completado');
+        console.log(`Quiz completado. Usuario ha obtenido: ${puntuacion} preguntas correctas`);
     }   
 })
 
-const opcionesBox = document.querySelector(".options-list")
+/**
+ * 
+ * @param {number} index el indice de la pregunta
+ * @param {{pregunta: string, opciones: string[], correcta: string}[]} data arreglo de las preguntas
+ */
 
-// mostrar pregunta en el contenedor correspondiente
-export function mostrarPregunta(index){
-
+// mostrar pregunta en el contenedor correspondiente segun el indice y arreglo dado
+export function mostrarPregunta(index, data){
+    preguntas = data
     actualizarContador(index)
     const preguntaText = document.querySelector('#questionS')
     
-    preguntaText.textContent = `${index+1}. ${datajs[index].pregunta}`
+    preguntaText.textContent = `${index+1}. ${data[index].pregunta}`
 
-    let options = `
+    let opciones = `
     
-    <button id="A" class="option">A. ${datajs[index].opciones[0]}</button>
-    <button id="B" class="option">B. ${datajs[index].opciones[1]}</button>
-    <button id="C" class="option">C. ${datajs[index].opciones[2]}</button>
-    <button id="D" class="option">D. ${datajs[index].opciones[3]}</button>
+    <button id="A" class="option">A. ${data[index].opciones[0]}</button>
+    <button id="B" class="option">B. ${data[index].opciones[1]}</button>
+    <button id="C" class="option">C. ${data[index].opciones[2]}</button>
+    <button id="D" class="option">D. ${data[index].opciones[3]}</button>
     `;
     
-    opcionesBox.innerHTML = options;
+    opcionesBox.innerHTML = opciones;
 
-    const option = document.querySelectorAll('.option')
-    option.forEach(op => {
+    const opcion = document.querySelectorAll('.option')
+    opcion.forEach(op => {
         op.addEventListener('click', function() {
             // Llama a la función con 'this' que representa el elemento clickeado
-            seleccionarOpcion(this);
+            verSeleccion(this,data);
         });
     });
-}
 
-function seleccionarOpcion(respuesta){
+    total = data.length
+}
+/**
+ * 
+ * @param {Element} respuesta elemento obtenido del html
+ * @param {{pregunta: string, opciones: string[], correcta: string}[]} data preguntas del quiz
+ */
+// funcion 
+function verSeleccion(respuesta,data){
+    // con el slice se elimina el "1. "
     let respuestaSeleccionada = respuesta.textContent.slice(3,respuesta.length);
-    let respuestaCorrecta = datajs[contador].correcta
+    let respuestaCorrecta = data[contador].correcta
     
     
-    // console.log(respuestaCorrecta);    
+    // verificar que ha seleccionado la respuesta correcta
          
     if(respuestaSeleccionada == respuestaCorrecta){
         respuesta.classList.add('correcta')
-        score++;
-        actualizarScore();
+        puntuacion++;
+        actualizarPuntuacion();
     } else{
         respuesta.classList.add('incorrecta')
-
+        // si se equivocó mostrar cual era la respuesta correcta
         for(let i = 0; i < opcionesBox.children.length; i++){
             if(opcionesBox.children[i].textContent == respuestaCorrecta){
                 opcionesBox.children[i].classList.add('correcta')
             } 
         }
-
     }   
 
+    // un ciclo for para desactivar las opciones ya que solo se puede seleccionar una respuesta a la vez
     for(let i = 0; i < opcionesBox.children.length; i++){
         opcionesBox.children[i].classList.add('desactivado')
     }
     
 }
 
+// funcion para actualizar por cual pregunta va el usuario
 function actualizarContador(index){
-    totalText.innerHTML = ` ${index+1} de ${datajs.length} preguntas `
+    totalText.innerHTML = ` ${index+1} de ${total} preguntas `
 }
 
-function actualizarScore(){
-    const scoreText = document.querySelector('.score')
-    scoreText.textContent = `Puntuación: ${score} / ${datajs.length}`
+// funcion para actualizar la puntuacion o cuantas preguntas ha seleccionado correctamente
+function actualizarPuntuacion(){
+    const puntuacionText = document.querySelector('.score')
+    puntuacionText.textContent = `Puntuación: ${puntuacion} / ${total}`
 }
