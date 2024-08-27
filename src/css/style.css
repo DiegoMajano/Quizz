@@ -213,14 +213,28 @@ h2{
     background-color: var(--option-bg);
 }
 
+#option-list .option.correct{
+    background: #26D782;
+}
+
+.desactivado { 
+    pointer-events: none;
+}
+
+
+.n-preguntas, .score{
+    color: var(--js-bg);
+    text-align: center;
+}
+
 article.options button.option {
     background-color: var(--button-bg);
     color: var(--text-color);
     font-size: 0.9rem;
     font-weight: 500;
     display: grid;
-    grid-template-rows: 1fr;
-    grid-template-columns: 1fr 3fr 1fr;
+    /* grid-template-rows: 1fr;
+    grid-template-columns: 1fr 3fr 1fr; */
     align-items: center;
     justify-items: start;
     width: 100%;
