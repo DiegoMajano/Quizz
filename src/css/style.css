@@ -247,9 +247,7 @@ article.options button.option {
     padding: .75rem;
     box-shadow: var(--shadow-hg) var(--shadow);
 }
-.correct{
-    background-color: var(--correct-color);
-}
+
 .button-submit:disabled {
     background-color: #6c1d9e;
 }
