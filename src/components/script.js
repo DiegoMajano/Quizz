@@ -9,9 +9,8 @@ let preguntas = []
 const btnNext = document.querySelector("#btn-next")    
 const totalText = document.querySelector('.n-preguntas')
 const opcionesBox = document.querySelector(".options-list")
+const bar = document.querySelector('#bar');
 
-
-// agregando un event listener al boton siguiente
 btnNext.addEventListener('click', ()=>{
     // verificar que se muestren la cantidad de preguntas que existen en el quiz
     if(contador < total - 1){
@@ -33,7 +32,7 @@ export function mostrarPregunta(index, data){
     preguntas = data
     total = preguntas.length
     actualizarContador(index)
-    const preguntaText = document.querySelector('#questionS')
+    const preguntaText = document.querySelector('#questions')
 
     //opcion para que no permita clickear el boton siguiente sin seleccionar respuesta
     btnNext.disabled = true;
@@ -42,10 +41,10 @@ export function mostrarPregunta(index, data){
 
     let opciones = `
     
-    <button id="A" class="option">A. ${data[index].opciones[0]}</button>
-    <button id="B" class="option">B. ${data[index].opciones[1]}</button>
-    <button id="C" class="option">C. ${data[index].opciones[2]}</button>
-    <button id="D" class="option">D. ${data[index].opciones[3]}</button>
+    <button id="A" class="option"><div class="option-box">A</div>${data[index].opciones[0]}</button>
+    <button id="B" class="option"><div class="option-box">B</div>${data[index].opciones[1]}</button>
+    <button id="C" class="option"><div class="option-box">C</div>${data[index].opciones[2]}</button>
+    <button id="D" class="option"><div class="option-box">D</div>${data[index].opciones[3]}</button>
     `;
     
     opcionesBox.innerHTML = opciones;
@@ -67,27 +66,26 @@ export function mostrarPregunta(index, data){
  */
 // funcion 
 function verSeleccion(respuesta,data){
-    // con el slice se elimina el "1. "
-    let respuestaSeleccionada = respuesta.textContent.slice(3,respuesta.length);
+    // con el slice se elimina el "A/B/C/D "
+    let respuestaSeleccionada = respuesta.textContent.slice(1,respuesta.length);
     let respuestaCorrecta = data[contador].correcta
+    console.log(respuestaSeleccionada)
     
     // verificar que hay una respuesta seleccionada
     if(respuesta){
         btnNext.disabled = false;
     }
-    
     // verificar que ha seleccionado la respuesta correcta
-         
     if(respuestaSeleccionada == respuestaCorrecta){
-        respuesta.classList.add('correcta')
+        respuesta.style.backgroundColor = '#26D782';
         puntuacion++;
         actualizarPuntuacion();
     } else{
-        respuesta.classList.add('incorrecta')
-        // si se equivocó mostrar cual era la respuesta correcta
-        for(let i = 0; i < opcionesBox.children.length; i++){
-            if(opcionesBox.children[i].textContent == respuestaCorrecta){
-                opcionesBox.children[i].classList.add('correcta')
+        respuesta.style.backgroundColor = '#EE5454';
+        /*si se equivocó mostrar cual era la respuesta correcta*/
+       for(let i = 0; i < opcionesBox.children.length; i++){
+            if(opcionesBox.children[i].textContent.slice(1) === respuestaCorrecta){
+                opcionesBox.children[i].style.backgroundColor = '#26D782';
             } 
         }
     }   
@@ -102,10 +100,11 @@ function verSeleccion(respuesta,data){
 // funcion para actualizar por cual pregunta va el usuario
 function actualizarContador(index){
     totalText.innerHTML = ` ${index+1} de ${total} preguntas `
+    bar.style.width = ` ${(index+1)*10}%`;
 }
 
 // funcion para actualizar la puntuacion o cuantas preguntas ha seleccionado correctamente
 function actualizarPuntuacion(){
-    const puntuacionText = document.querySelector('.score')
-    puntuacionText.textContent = `Puntuación: ${puntuacion} / ${total}`
+    const puntuacionText = document.querySelector('.score');
+    puntuacionText.textContent = `Puntuación: ${puntuacion} / ${total}`;
 }

@@ -38,33 +38,29 @@
     </header>
     <main class="container ps-5 pe-5 pb-5">
         <section class="row">
-            <article class="col-md-6">                
-                
-                <h2 id="questionS"> </h2>
+            <article class="col-md-6">
+                <h2 id="questions"></h2>
                 <div class="progress-bar whole">
-                    <div class="progress-bar done">
+                    <div class="progress-bar done" id="bar">
                     </div>
                 </div>
             </article>
             <article id="options-list" class="choices options col-md-6 options-list">
-            
                 <!-- se colocan aqui las opciones -->
-                    <!--                     <div class="option-box">D</div>
--->
-                
-                
+                <!--<div class="option-box">D</div>-->
             </article>
         </section>
         <section class="row">
-            <article class="col-md-6 d-flex justify-content-around align-items-center">
+            <article class="col-md-6 d-flex justify-content-between">
                 <div class="n-preguntas"></div>
-                <div class="score"> Puntuación: 0 / 10 </div>
+                <div class="score">Puntuación: 0 / 10</div>
             </article>
             <article class="col-md-6 mt-2">
                 <button id="btn-next" class="button-submit">
                     Siguiente pregunta
                 </button>
             </article>
+            
         </section>
     </main>
     <footer>

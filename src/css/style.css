@@ -8,23 +8,29 @@
     --purple: #A729F5;
     --purple-hover: #9125d4;
     --bg-col: white;
-    --button-bg: white;
+    --button-bg: #ffffffeb;
     --option-bg: #F4F6FA;
     --option-color: #626C7F;
     --correct-color: #26D782;
     --invalid-color: #EE5454;
-    --bg: url("../images/pattern-background-desktop-light.svg");
-    --sun-src: url("../images/icon-sun-dark.svg");
-    --moon-src: url("../images/icon-moon-dark.svg");
+    --shadow: rgba(201, 205, 212, 0.751);
+    --shadow-hg: 10px 5px 15px 0px;
+    --shadow-hg-bar: 5px 5px 10px 0px;
+    --bg: url("../img/pattern-background-desktop-light.svg");
+    --sun-src: url("../img/icon-sun-dark.svg");
+    --moon-src: url("../img/icon-moon-dark.svg");
 }
 [data-theme="dark"] {
     --text-color: #FFF;
     --text-color-p: #ABC1E1;
     --bg-col: #313E51;
     --button-bg: #3B4D66;
-    --bg: url("../images/pattern-background-desktop-dark.svg");
-    --sun-src: url("../images/icon-sun-light.svg");
-    --moon-src: url("../images/icon-moon-light.svg");
+    --shadow: rgba(143, 160, 193, 0.101);
+    --shadow-hg: 0px 15px 30px 0px;
+    --shadow-hg-bar: 0px 0px 10px 0px;
+    --bg: url("../img/pattern-background-desktop-dark.svg");
+    --sun-src: url("../img/icon-sun-light.svg");
+    --moon-src: url("../img/icon-moon-light.svg");
 }
 *{
     margin: 0;
@@ -105,7 +111,7 @@ h1{
 h1 span {
     font-weight: 500;
 }
-p {
+p, div.n-preguntas, div.score{
     color: var(--text-color-p);
     font-style: italic;
     font-weight: 400;
@@ -133,26 +139,26 @@ button.quiz-type {
     border-radius: .75rem;
     border: 0;
     padding: .75rem;
-    box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, .14);
+    box-shadow: var(--shadow-hg) var(--shadow);
     text-decoration: none;
 }
 .button-icon-container>img {
     border-radius: .75rem;
     padding: .15rem;
 }
-.button-icon-container>img[src="images/icon-html.svg"] {
+.button-icon-container>img[src="img/icon-html.svg"] {
     background-color: var(--html-bg);
 }
 
-.button-icon-container>img[src="images/icon-css.svg"] {
+.button-icon-container>img[src="img/icon-css.svg"] {
     background-color: var(--css-bg);
 }
 
-.button-icon-container>img[src="images/icon-js.svg"] {
+.button-icon-container>img[src="img/icon-js.svg"] {
     background-color: var(--js-bg);
 }
 
-.button-icon-container>img[src="images/icon-accessibility.svg"] {
+.button-icon-container>img[src="img/icon-accessibility.svg"] {
     background-color: var(--accessibility-bg);
 }
 
@@ -190,11 +196,12 @@ h2{
     margin-bottom: 2.5rem;
     padding: .25rem;
     border-radius: 62rem;
+    box-shadow: var(--shadow-hg-bar) var(--shadow);
 }
 .progress-bar.done {
     background-color: var(--purple);
     border-radius: 6.5rem;
-    width: 80%;
+    /*width: 80%;*/
     height: .9rem;
 }
 
@@ -207,20 +214,15 @@ h2{
     align-items: center;
     justify-content: center;
     color: var(--option-color);
-    width: 2rem;
-    height: 2rem;
+    width: 1.6rem;
+    height: 1.6rem;
     border-radius: .25rem;
     background-color: var(--option-bg);
-}
-
-#option-list .option.correct{
-    background: #26D782;
 }
 
 .desactivado { 
     pointer-events: none;
 }
-
 
 .n-preguntas, .score{
     color: var(--js-bg);
@@ -233,8 +235,8 @@ article.options button.option {
     font-size: 0.9rem;
     font-weight: 500;
     display: grid;
-    /*grid-template-rows: 1fr;
-    grid-template-columns: .5fr 3fr 0fr;*/
+    grid-template-rows: 1fr;
+    grid-template-columns: .4fr 3fr 0fr;
     text-align: left;
     align-items: center;
     justify-items: start;
@@ -243,7 +245,13 @@ article.options button.option {
     border-radius: .75rem;
     border: 0;
     padding: .75rem;
-    box-shadow: 0px 16px 40px 0px rgba(143, 160, 193, .14);
+    box-shadow: var(--shadow-hg) var(--shadow);
+}
+.correct{
+    background-color: var(--correct-color);
+}
+.button-submit:disabled {
+    background-color: #6c1d9e;
 }
 .button-submit{
     font-size: 0.9rem;
@@ -258,7 +266,7 @@ article.options button.option {
     border: 0;
     padding: .75rem;
 }
-.button-submit:hover{
+.button-submit:enabled:hover{
     background-color: var(--purple-hover);
 }
 /******************************Footer*****************************/
@@ -273,9 +281,9 @@ footer {
 /**********************MEDIA**********************/
 @media(max-width: 900px){
     :root { 
-        --bg: url("../images/pattern-background-mobile-light.svg");
+        --bg: url("../img/pattern-background-mobile-light.svg");
     }
     [data-theme="dark"] {
-        --bg: url("../images/pattern-background-mobile-dark.svg");
+        --bg: url("../img/pattern-background-mobile-dark.svg");
     }
 }
