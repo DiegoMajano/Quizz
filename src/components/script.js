@@ -31,8 +31,12 @@ btnNext.addEventListener('click', ()=>{
 // mostrar pregunta en el contenedor correspondiente segun el indice y arreglo dado
 export function mostrarPregunta(index, data){
     preguntas = data
+    total = preguntas.length
     actualizarContador(index)
     const preguntaText = document.querySelector('#questionS')
+
+    //opcion para que no permita clickear el boton siguiente sin seleccionar respuesta
+    btnNext.disabled = true;
     
     preguntaText.textContent = `${index+1}. ${data[index].pregunta}`
 
@@ -67,6 +71,10 @@ function verSeleccion(respuesta,data){
     let respuestaSeleccionada = respuesta.textContent.slice(3,respuesta.length);
     let respuestaCorrecta = data[contador].correcta
     
+    // verificar que hay una respuesta seleccionada
+    if(respuesta){
+        btnNext.disabled = false;
+    }
     
     // verificar que ha seleccionado la respuesta correcta
          
