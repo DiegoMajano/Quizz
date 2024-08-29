@@ -148,19 +148,19 @@ button.quiz-type {
     border-radius: .75rem;
     padding: .15rem;
 }
-.button-icon-container>img[src="img/icon-html.svg"] {
+.button-icon-container>img[src="/src/img/icon-html.svg"] {
     background-color: var(--html-bg);
 }
 
-.button-icon-container>img[src="img/icon-css.svg"] {
+.button-icon-container>img[src="/src/img/icon-css.svg"] {
     background-color: var(--css-bg);
 }
 
-.button-icon-container>img[src="img/icon-js.svg"] {
+.button-icon-container>img[src="/src/img/icon-js.svg"] {
     background-color: var(--js-bg);
 }
 
-.button-icon-container>img[src="img/icon-accessibility.svg"] {
+.button-icon-container>img[src="/src/img/icon-accessibility.svg"] {
     background-color: var(--accessibility-bg);
 }
 
@@ -237,6 +237,8 @@ h2{
     border-radius: 6.5rem;
     /*width: 80%;*/
     height: .9rem;
+    transition: width 1s ease; /**/
+
 }
 
 /***********************right column - form***********************/
@@ -300,6 +302,49 @@ article.options button.option {
 }
 .button-submit:enabled:hover{
     background-color: var(--purple-hover);
+}
+/********************MODAL*************************/
+.modal-content{
+    background-color: var(--bg-col);
+}
+.modal-header, .modal-footer {
+    border: 0;
+}
+.btn-again{
+    font-size: 0.9rem;
+    background-color: var(--purple);
+    color: white;
+    font-weight: 500;
+    border-radius: .5rem;
+    border: 0;
+    padding: .5rem;
+}
+.btn-again:hover{
+    background-color: var(--purple-hover);
+}
+.btn-back{
+    font-size: 0.9rem;
+    background-color: #8b8b8b;
+    color: white;
+    font-weight: 500;
+    border-radius: .5rem;
+    border: 0;
+    padding: .5rem;
+}
+.btn-back:hover{
+    background-color: #6b6b6b;
+}
+.btn-close {
+    --bs-btn-close-focus-shadow: 0 0 0 0rem rgba(255, 255, 255, 0);
+}
+.img-modal{
+    width: 12%;
+}
+.modal-body{
+    color: var(--text-color-p);
+}
+.modal-text{
+    color: var(--text-color);
 }
 /******************************Footer*****************************/
 footer {

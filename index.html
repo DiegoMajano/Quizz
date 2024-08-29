@@ -13,14 +13,32 @@
 </head>
 <body>
     <header class="row-top">
-        <nav class="navbar container p-5 d-flex justify-content-end">
-            <div class="toggle-container">
-                <div class="sun-icon"></div>
-                <label class="switch">
-                    <input type="checkbox" id="mode-toggle">
-                    <span class="slider round"></span>
-                </label>
-                <div class="moon-icon"></div>
+        <nav class="navbar container p-5">
+            <div class="d-flex justify-content-start">
+                <div id="icon-js" class="title-nav quiz-type d-none">
+                    <div class="button-icon-container"><img src="/src/img/icon-js.svg"></div>JavaScript
+                </div>
+                <div id="icon-css" class="title-nav quiz-type d-none">
+                    <div class="button-icon-container"><img src="/src/img/icon-css.svg"></div>CSS
+                </div>
+                <div id="icon-html" class="title-nav quiz-type d-none">
+                    <div class="button-icon-container"><img src="/src/img/icon-html.svg"></div>HTML
+                </div>
+                <div id="icon-acce" class="title-nav quiz-type d-none">
+                    <div class="button-icon-container"><img src="/src/img/icon-accessibility.svg"></div>Accessibility
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <div class="toggle-container">
+                    <div class="sun-icon">
+                    </div>
+                    <label class="switch">
+                        <input type="checkbox" id="mode-toggle">
+                        <span class="slider round"></span>
+                    </label>
+                    <div class="moon-icon">
+                    </div>
+                </div>
             </div>
         </nav>
     </header>
@@ -35,23 +53,23 @@
             <article class="choices col-md-6">
                 <button id="HTML" class="quiz-type"> 
                     <div class="button-icon-container">
-                      <img src="./src/img/icon-html.svg" alt="html icon">
+                      <img src="/src/img/icon-html.svg" alt="html icon">
                     </div>HTML
                 </button>
                 <button id="CSS" class="quiz-type">
                     <div class="button-icon-container">
-                      <img src="./src/img/icon-css.svg" alt="css icon">
+                      <img src="/src/img/icon-css.svg" alt="css icon">
                     </div>CSS
                 </button>
                 <button id="JavaScript" class="quiz-type">
                     <div class="button-icon-container">
-                      <img src="./src/img/icon-js.svg" alt="javascript icon">
+                      <img src="/src/img/icon-js.svg" alt="javascript icon">
                     </div>
                     JavaScript
                 </button>
                 <button id="Accessibility" class="quiz-type">
                     <div class=" button-icon-container">
-                      <img src="./src/img/icon-accessibility.svg" alt="Accessibility icon">
+                      <img src="/src/img/icon-accessibility.svg" alt="Accessibility icon">
                     </div>
                     Accessibility
                 </button>
@@ -82,10 +100,34 @@
                             Siguiente pregunta
                         </button>
                     </article>
-                    
                 </section>
             </div>
         </section>
+        <div class="modal fade" id="modalFinalizado" data-bs-backdrop="static">
+            <div class="modal-dialog modal-dialog-centered">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <button type="button" onclick="location.reload();" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                  <div class="row align-items-start">
+                    <div class="col-12">
+                        <img class="img-modal" src="" alt="icono respuesta">
+                    </div>
+                    <div class="col-12 mt-2 modal-text fs-4 fw-medium">
+                        ¡Has finalizado el Quiz!
+                    </div>
+                    <div class="col-12 mt-2 modal-text fs-5" id="comentario">
+                    </div>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" onclick="location.reload();" class="btn-back" data-bs-dismiss="modal">Regresar</button>
+                  <button type="button" class="btn-again">Volver a hacer</button>
+                </div>
+              </div>
+            </div>
+        </div>
     </main>
     <footer>
         <p>Grupo #2</p>

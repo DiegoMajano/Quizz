@@ -17,7 +17,7 @@ function main(){
     const btn_ACC = document.querySelector('#Accessibility'); 
 
     btn_HTML.addEventListener('click', () => {
-      btn_HTML.style.backgroundColor = '#778fb5'
+      btn_HTML.style.backgroundColor = '#778fb5';
       setTimeout(function() {
         seleccionarQuiz(0);
       }, 500)
@@ -52,15 +52,19 @@ function seleccionarQuiz(nQuiz){
   switch (nQuiz) {
     case 0:
       mostrarPregunta(0, dataHtml)
+      document.querySelector('#icon-html').classList.remove('d-none');
       break;
     case 1:
       mostrarPregunta(0, dataCss)
+      document.querySelector('#icon-css').classList.remove('d-none');
       break;
     case 2:
       mostrarPregunta(0, dataJs)
+      document.querySelector('#icon-js').classList.remove('d-none');
       break;
     case 3:
       mostrarPregunta(0, dataAcce)
+      document.querySelector('#icon-acce').classList.remove('d-none');
       break;
   
     default:

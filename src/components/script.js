@@ -10,6 +10,10 @@ const btnNext = document.querySelector("#btn-next")
 const totalText = document.querySelector('.n-preguntas')
 const opcionesBox = document.querySelector(".options-list")
 const bar = document.querySelector('#bar');
+const imagen = document.querySelector('.img-modal');
+const comentario = document.querySelector('#comentario');
+const btnAgain = document.querySelector('.btn-again');
+const puntuacionText = document.querySelector('.score');
 
 btnNext.addEventListener('click', ()=>{
     // Verificar si se seleccionó una opción antes de avanzar
@@ -25,12 +29,49 @@ btnNext.addEventListener('click', ()=>{
         //Mostrará si la respuesta seleccionada fue correcta o no, luego de 1.2seg pasará a la siguiente
         setTimeout(function() {
             mostrarPregunta(contador, preguntas);
+            if(contador===9){
+                btnNext.textContent = "Finalizar";
+            }
         }, 1000)
+        console.log(contador)
         
-    } else {
+    }else{
         console.log(`Quiz completado. Usuario ha obtenido: ${puntuacion} preguntas correctas`);
+
+        setTimeout(function() {
+            if(puntuacion>=6){
+                imagen.src = '/src/img/img-correct.png';
+                comentario.innerHTML = `Tienes ${puntuacion}/10 preguntas correctas <br>¡Buen trabajo!`
+            }else{
+                imagen.src = '/src/img/img-incorrect.png';
+                comentario.innerHTML = `Tienes ${puntuacion}/10 preguntas correctas <br>¡Suerte a la próxima!`
+            }
+            var modalFinalizado = new bootstrap.Modal(document.getElementById('modalFinalizado'));
+            modalFinalizado.show();
+        }, 1500)
     }
+    
 });
+
+// Volver a hacer
+btnAgain.addEventListener('click', function() {
+    //se resetea todo
+    contador = 0;
+    puntuacion = 0;
+    respuestaSeleccionada = null;
+    
+    totalText.textContent = `1 de ${total} preguntas`;
+    bar.style.width = `10%`;
+    btnNext.textContent = "Siguiente pregunta";
+    btnNext.disabled = true;
+    puntuacionText.textContent = `Puntuación: 0 / ${total}`;
+
+    mostrarPregunta(contador, preguntas);
+    
+    var modalFinalizado = bootstrap.Modal.getInstance(document.getElementById('modalFinalizado'));
+    modalFinalizado.hide();
+});
+
 
 /**
  * 
@@ -140,7 +181,6 @@ function actualizarContador(index){
 
 // Función para actualizar la puntuación o cuántas preguntas ha seleccionado correctamente
 function actualizarPuntuacion(){
-    const puntuacionText = document.querySelector('.score');
     puntuacionText.textContent = `Puntuación: ${puntuacion} / ${total}`;
 }
 
