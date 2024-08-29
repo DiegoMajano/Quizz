@@ -10,7 +10,7 @@ function toggleMode() {
 
 modeToggle.addEventListener('change', toggleMode);
 
-function setInitialMode() {
+export function setInitialMode() {
     const prefersDarkScheme = window.matchMedia("(prefers-color-scheme: dark)").matches;
     if (prefersDarkScheme) {
         modeToggle.checked = true;
@@ -21,4 +21,3 @@ function setInitialMode() {
     }
 }
 
-setInitialMode();
