@@ -25,7 +25,7 @@ btnNext.addEventListener('click', ()=>{
         //Mostrará si la respuesta seleccionada fue correcta o no, luego de 1.2seg pasará a la siguiente
         setTimeout(function() {
             mostrarPregunta(contador, preguntas);
-        }, 1200)
+        }, 1000)
         
     } else {
         console.log(`Quiz completado. Usuario ha obtenido: ${puntuacion} preguntas correctas`);
@@ -66,20 +66,33 @@ export function mostrarPregunta(index, data){
     <button id="D" class="option"><div class="option-box">D</div>${data[index].opciones[3]}</button>
     `;
     
+    
     opcionesBox.innerHTML = opciones;
-
+    
     const opcion = document.querySelectorAll('.option');
     opcion.forEach(op => {
         op.addEventListener('click', function() {
             // Guardar la selección del usuario
             respuestaSeleccionada = this;
+            regresarEstado(opcion);
             this.style.backgroundColor = '#778fb5'
             btnNext.disabled = false;  // Habilitar el botón "Siguiente"
             
         }); 
     });
+}
 
-    //total = data.length;
+// Función para regresar al estado anterior de la selección
+
+/**
+ * 
+ * @param {NodeList[]} botones NodeList de botones para regresar su estado anterior
+ */
+
+function regresarEstado(botones){
+    botones.forEach(boton => {
+        boton.style.backgroundColor = ''
+    });
 }
 
 /**
@@ -94,7 +107,6 @@ function mostrarResultado() {
         // Verificar si la respuesta seleccionada es correcta
         if (respuestaSeleccionadaTexto == respuestaCorrecta) {
             respuestaSeleccionada.style.backgroundColor = '#26D782';
-            console.log(respuestaSeleccionada);
             
             puntuacion++;
             actualizarPuntuacion();
@@ -114,6 +126,11 @@ function mostrarResultado() {
         }
     }
 }
+
+/**
+ * 
+ * @param {number} index Número de pregunta 
+ */
 
 // Función para actualizar por cuál pregunta va el usuario
 function actualizarContador(index){
