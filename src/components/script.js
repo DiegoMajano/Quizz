@@ -22,7 +22,11 @@ btnNext.addEventListener('click', ()=>{
     // Verificar que no se superen la cantidad de preguntas del quiz
     if (contador < total - 1) {
         contador++;
-        mostrarPregunta(contador, preguntas);
+        //Mostrará si la respuesta seleccionada fue correcta o no, luego de 1.2seg pasará a la siguiente
+        setTimeout(function() {
+            mostrarPregunta(contador, preguntas);
+        }, 1200)
+        
     } else {
         console.log(`Quiz completado. Usuario ha obtenido: ${puntuacion} preguntas correctas`);
     }
@@ -69,12 +73,13 @@ export function mostrarPregunta(index, data){
         op.addEventListener('click', function() {
             // Guardar la selección del usuario
             respuestaSeleccionada = this;
+            this.style.backgroundColor = '#778fb5'
             btnNext.disabled = false;  // Habilitar el botón "Siguiente"
             
-        });
+        }); 
     });
 
-    total = data.length;
+    //total = data.length;
 }
 
 /**
