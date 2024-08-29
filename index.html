@@ -24,8 +24,8 @@
             </div>
         </nav>
     </header>
-    <main class="container ps-5 pe-5 pb-5">
-        <section class="row">
+    <main class="container ps-5 pe-5 pb-5 position-relative">        
+        <section class="row menu">            
             <article class="start-menu col-md-6">
                 <div class="left-content">
                     <h1>Welcome to the <span>Frontend Quiz!</span></h1>
@@ -33,29 +33,58 @@
                 </div>
             </article>
             <article class="choices col-md-6">
-                <button id="HTML" class="quiz-type" onclick="window.location.href='./pages/form.html'"> 
+                <button id="HTML" class="quiz-type"> 
                     <div class="button-icon-container">
                       <img src="./src/img/icon-html.svg" alt="html icon">
                     </div>HTML
                 </button>
-                <button id="CSS" class="quiz-type" onclick="window.location.href='./pages/form.html'">
+                <button id="CSS" class="quiz-type">
                     <div class="button-icon-container">
                       <img src="./src/img/icon-css.svg" alt="css icon">
                     </div>CSS
                 </button>
-                <button id="JavaScript" class="quiz-type" onclick="window.location.href='./pages/form.html'">
+                <button id="JavaScript" class="quiz-type">
                     <div class="button-icon-container">
                       <img src="./src/img/icon-js.svg" alt="javascript icon">
                     </div>
                     JavaScript
                 </button>
-                <button id="Accessibility" class="quiz-type" onclick="window.location.href='./pages/form.html'">
+                <button id="Accessibility" class="quiz-type">
                     <div class=" button-icon-container">
                       <img src="./src/img/icon-accessibility.svg" alt="Accessibility icon">
                     </div>
                     Accessibility
                 </button>
             </article>
+        </section>
+        <section class="quizz container position-absolute top-50 start-50 translate-middle">
+            <div class="quiz-content">
+                <section class="row">
+                    <article class="col-md-6">
+                        <h2 id="questions"></h2>
+                        <div class="progress-bar whole">
+                            <div class="progress-bar done" id="bar">
+                            </div>
+                        </div>
+                    </article>
+                    <article id="options-list" class="choices options col-md-6 options-list">
+                        <!-- se colocan aqui las opciones -->
+                        <!--<div class="option-box">D</div>-->
+                    </article>
+                </section>
+                <section class="row quiz-info">
+                    <article class="col-md-6 d-flex justify-content-between">
+                        <div class="n-preguntas"></div>
+                        <div class="score">Puntuación: 0 / 10</div>
+                    </article>
+                    <article class="col-md-6 mt-2">
+                        <button id="btn-next" class="button-submit">
+                            Siguiente pregunta
+                        </button>
+                    </article>
+                    
+                </section>
+            </div>
         </section>
     </main>
     <footer>

@@ -36,6 +36,8 @@
     margin: 0;
     padding: 0;
 }
+
+
 body {
     font-family: 'Rubik', sans-serif;
     background-color: var(--bg-col);
@@ -160,6 +162,38 @@ button.quiz-type {
 
 .button-icon-container>img[src="img/icon-accessibility.svg"] {
     background-color: var(--accessibility-bg);
+}
+
+/******************** sección del quiz *******************/
+
+.contendor {
+    display: flex;
+    height: 100vh;
+}
+
+.quizz{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    position: absolute;
+    transition: all .6s;
+    visibility: hidden;
+}
+
+.quiz-content {
+    visibility: hidden;
+}
+
+.mostrar{
+    visibility: visible;    
+    z-index: 1000;
+}
+
+.no-mostrar {
+    visibility: hidden;
+    
 }
 
 /**********************Nav - form***********************/

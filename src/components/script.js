@@ -32,7 +32,16 @@ export function mostrarPregunta(index, data){
     preguntas = data
     total = preguntas.length
     actualizarContador(index)
+
     const preguntaText = document.querySelector('#questions')
+    const contenedorQuiz = document.querySelector('.quizz')
+    const contenedorInfo = document.querySelector('.quiz-content')
+    const menu = document.querySelector('.menu')
+
+    contenedorInfo.classList.add('mostrar')
+    contenedorQuiz.classList.add('mostrar')
+    menu.classList.add('no-mostrar')
+
 
     //opcion para que no permita clickear el boton siguiente sin seleccionar respuesta
     btnNext.disabled = true;
@@ -69,7 +78,7 @@ function verSeleccion(respuesta,data){
     // con el slice se elimina el "A/B/C/D "
     let respuestaSeleccionada = respuesta.textContent.slice(1,respuesta.length);
     let respuestaCorrecta = data[contador].correcta
-    console.log(respuestaSeleccionada)
+    // console.log(respuestaSeleccionada)
     
     // verificar que hay una respuesta seleccionada
     if(respuesta){
