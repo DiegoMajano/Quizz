@@ -46,8 +46,8 @@ export function mostrarPregunta(index, data){
     const menu = document.querySelector('.menu')
 
     contenedorInfo.classList.add('mostrar')
-    // contenedorQuiz.classList.add('mostrar')
-    // menu.classList.add('no-mostrar')
+    contenedorQuiz.classList.add('mostrar')
+    menu.classList.add('no-mostrar')
 
 
     //opcion para que no permita clickear el boton siguiente sin seleccionar respuesta
@@ -70,6 +70,7 @@ export function mostrarPregunta(index, data){
             // Guardar la selección del usuario
             respuestaSeleccionada = this;
             btnNext.disabled = false;  // Habilitar el botón "Siguiente"
+            
         });
     });
 
@@ -84,9 +85,12 @@ function mostrarResultado() {
         let respuestaSeleccionadaTexto = respuestaSeleccionada.textContent.slice(1);
         let respuestaCorrecta = preguntas[contador].correcta;
         
+
         // Verificar si la respuesta seleccionada es correcta
         if (respuestaSeleccionadaTexto == respuestaCorrecta) {
             respuestaSeleccionada.style.backgroundColor = '#26D782';
+            console.log(respuestaSeleccionada);
+            
             puntuacion++;
             actualizarPuntuacion();
         } else {
