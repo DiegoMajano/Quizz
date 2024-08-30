@@ -10,7 +10,7 @@ export const dataAcce = [
     {
         pregunta: '¿Cuál de los siguientes NO es un ejemplo de contenido multimedia?',
         opciones: [ 'Un video con subtítulos', 
-                    'Un grafico estático', 
+                    'Un gráfico estático', 
                     'Un podcast', 
                     'Una animación interactiva'],
         correcta: 'Un gráfico estático'
@@ -40,7 +40,7 @@ export const dataAcce = [
         correcta: 'Perceptible'
     },
     {
-        pregunta: ': ¿Qué principio de accesibilidad se asegura de que el contenido puede ser operado por personas con diferentes tipos de discapacidad?',
+        pregunta: '¿Qué principio de accesibilidad se asegura de que el contenido puede ser operado por personas con diferentes tipos de discapacidad?',
         opciones: [ 'Perceptible', 
                     'Operable', 
                     'Comprensible', 
