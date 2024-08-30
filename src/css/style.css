@@ -13,6 +13,7 @@
     --option-color: #626C7F;
     --correct-color: #26D782;
     --invalid-color: #EE5454;
+    --btn-selected: #ced3daf3;
     --shadow: rgba(201, 205, 212, 0.751);
     --shadow-hg: 10px 5px 15px 0px;
     --shadow-hg-bar: 5px 5px 10px 0px;
@@ -21,6 +22,7 @@
     --moon-src: url("../img/icon-moon-dark.svg");
 }
 [data-theme="dark"] {
+    --btn-selected: #778fb5;
     --text-color: #FFF;
     --text-color-p: #ABC1E1;
     --bg-col: #313E51;
@@ -302,6 +304,15 @@ article.options button.option {
 }
 .button-submit:enabled:hover{
     background-color: var(--purple-hover);
+}
+.btn-selected{
+    background-color: var(--btn-selected) !important;
+}
+.correct{
+    background-color: var(--correct-color) !important;
+}
+.incorrect{
+    background-color: var(--invalid-color) !important;
 }
 /********************MODAL*************************/
 .modal-content{

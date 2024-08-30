@@ -17,25 +17,25 @@ function main(){
     const btn_ACC = document.querySelector('#Accessibility'); 
 
     btn_HTML.addEventListener('click', () => {
-      btn_HTML.style.backgroundColor = '#778fb5';
+      btn_HTML.classList.add('btn-selected');
       setTimeout(function() {
         seleccionarQuiz(0);
       }, 500)
     } );
     btn_CSS.addEventListener('click', () => {
-      btn_CSS.style.backgroundColor = '#778fb5'
+      btn_CSS.classList.add('btn-selected')
       setTimeout(function() {
         seleccionarQuiz(1);
       }, 500)
     });
     btn_JS.addEventListener('click', () => {
-      btn_JS.style.backgroundColor = '#778fb5'
+      btn_JS.classList.add('btn-selected')
       setTimeout(function() {
         seleccionarQuiz(2);
       }, 500)
     });
     btn_ACC.addEventListener('click', () => {
-      btn_ACC.style.backgroundColor = '#778fb5'
+      btn_ACC.classList.add('btn-selected')
       setTimeout(function() {
         seleccionarQuiz(3);
       }, 500)

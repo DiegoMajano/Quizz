@@ -116,7 +116,8 @@ export function mostrarPregunta(index, data){
             // Guardar la selección del usuario
             respuestaSeleccionada = this;
             regresarEstado(opcion);
-            this.style.backgroundColor = '#778fb5'
+            //this.style.backgroundColor = '#778fb5'
+            this.classList.add('btn-selected')
             btnNext.disabled = false;  // Habilitar el botón "Siguiente"
             
         }); 
@@ -132,7 +133,8 @@ export function mostrarPregunta(index, data){
 
 function regresarEstado(botones){
     botones.forEach(boton => {
-        boton.style.backgroundColor = ''
+        //boton.style.backgroundColor = ''
+        boton.classList.remove('btn-selected')
     });
 }
 
@@ -147,16 +149,17 @@ function mostrarResultado() {
 
         // Verificar si la respuesta seleccionada es correcta
         if (respuestaSeleccionadaTexto == respuestaCorrecta) {
-            respuestaSeleccionada.style.backgroundColor = '#26D782';
-            
+            respuestaSeleccionada.classList.remove('btn-selected');
+            respuestaSeleccionada.classList.add('correct');
             puntuacion++;
             actualizarPuntuacion();
         } else {
-            respuestaSeleccionada.style.backgroundColor = '#EE5454';
+            respuestaSeleccionada.classList.remove('btn-selected');
+            respuestaSeleccionada.classList.add('incorrect');
             // Mostrar la respuesta correcta
             for (let i = 0; i < opcionesBox.children.length; i++) {
                 if (opcionesBox.children[i].textContent.slice(1) === respuestaCorrecta) {
-                    opcionesBox.children[i].style.backgroundColor = '#26D782';
+                    opcionesBox.children[i].classList.add('correct')
                 }
             }
         }
