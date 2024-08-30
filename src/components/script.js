@@ -1,25 +1,77 @@
-
 // variables de control
 let contador = 0
 let puntuacion = 0
 let total = 0
 let preguntas = []
+let respuestaSeleccionada = null;  // Nueva variable para guardar la selección
 
 // contenedores donde se mostrará el contenido del quiz
 const btnNext = document.querySelector("#btn-next")    
 const totalText = document.querySelector('.n-preguntas')
 const opcionesBox = document.querySelector(".options-list")
 const bar = document.querySelector('#bar');
+const imagen = document.querySelector('.img-modal');
+const comentario = document.querySelector('#comentario');
+const btnAgain = document.querySelector('.btn-again');
+const puntuacionText = document.querySelector('.score');
 
 btnNext.addEventListener('click', ()=>{
-    // verificar que se muestren la cantidad de preguntas que existen en el quiz
-    if(contador < total - 1){
+    // Verificar si se seleccionó una opción antes de avanzar
+    if (respuestaSeleccionada) {
+        mostrarResultado();  // Mostrar si la respuesta seleccionada es correcta o incorrecta
+        respuestaSeleccionada = null;  // Resetear la selección
+        btnNext.disabled = true;  // Deshabilitar el botón hasta que el usuario elija la siguiente respuesta
+    }
+
+    // Verificar que no se superen la cantidad de preguntas del quiz
+    if (contador < total - 1) {
         contador++;
-        mostrarPregunta(contador, preguntas)
-    } else{
+        //Mostrará si la respuesta seleccionada fue correcta o no, luego de 1.2seg pasará a la siguiente
+        setTimeout(function() {
+            mostrarPregunta(contador, preguntas);
+            if(contador===9){
+                btnNext.textContent = "Finalizar";
+            }
+        }, 1000)
+        console.log(contador)
+        
+    }else{
         console.log(`Quiz completado. Usuario ha obtenido: ${puntuacion} preguntas correctas`);
-    }   
-})
+
+        setTimeout(function() {
+            if(puntuacion>=6){
+                imagen.src = '/src/img/img-correct.png';
+                comentario.innerHTML = `Tienes ${puntuacion}/10 preguntas correctas <br>¡Buen trabajo!`
+            }else{
+                imagen.src = '/src/img/img-incorrect.png';
+                comentario.innerHTML = `Tienes ${puntuacion}/10 preguntas correctas <br>¡Suerte a la próxima!`
+            }
+            var modalFinalizado = new bootstrap.Modal(document.getElementById('modalFinalizado'));
+            modalFinalizado.show();
+        }, 1500)
+    }
+    
+});
+
+// Volver a hacer
+btnAgain.addEventListener('click', function() {
+    //se resetea todo
+    contador = 0;
+    puntuacion = 0;
+    respuestaSeleccionada = null;
+    
+    totalText.textContent = `1 de ${total} preguntas`;
+    bar.style.width = `10%`;
+    btnNext.textContent = "Siguiente pregunta";
+    btnNext.disabled = true;
+    puntuacionText.textContent = `Puntuación: 0 / ${total}`;
+
+    mostrarPregunta(contador, preguntas);
+    
+    var modalFinalizado = bootstrap.Modal.getInstance(document.getElementById('modalFinalizado'));
+    modalFinalizado.hide();
+});
+
 
 /**
  * 
@@ -27,84 +79,109 @@ btnNext.addEventListener('click', ()=>{
  * @param {{pregunta: string, opciones: string[], correcta: string}[]} data arreglo de las preguntas
  */
 
-// mostrar pregunta en el contenedor correspondiente segun el indice y arreglo dado
+// Mostrar pregunta en el contenedor correspondiente según el índice y arreglo dado
 export function mostrarPregunta(index, data){
     preguntas = data
     total = preguntas.length
     actualizarContador(index)
+
     const preguntaText = document.querySelector('#questions')
+    const contenedorQuiz = document.querySelector('.quizz')
+    const contenedorInfo = document.querySelector('.quiz-content')
+    const menu = document.querySelector('.menu')
+
+    contenedorInfo.classList.add('mostrar')
+    contenedorQuiz.classList.add('mostrar')
+    menu.classList.add('no-mostrar')
+
 
     //opcion para que no permita clickear el boton siguiente sin seleccionar respuesta
     btnNext.disabled = true;
     
-    preguntaText.textContent = `${index+1}. ${data[index].pregunta}`
+    preguntaText.textContent = `${index+1}. ${data[index].pregunta}`;
 
     let opciones = `
-    
     <button id="A" class="option"><div class="option-box">A</div>${data[index].opciones[0]}</button>
     <button id="B" class="option"><div class="option-box">B</div>${data[index].opciones[1]}</button>
     <button id="C" class="option"><div class="option-box">C</div>${data[index].opciones[2]}</button>
     <button id="D" class="option"><div class="option-box">D</div>${data[index].opciones[3]}</button>
     `;
     
+    
     opcionesBox.innerHTML = opciones;
-
-    const opcion = document.querySelectorAll('.option')
+    
+    const opcion = document.querySelectorAll('.option');
     opcion.forEach(op => {
         op.addEventListener('click', function() {
-            // Llama a la función con 'this' que representa el elemento clickeado
-            verSeleccion(this,data);
-        });
+            // Guardar la selección del usuario
+            respuestaSeleccionada = this;
+            regresarEstado(opcion);
+            this.style.backgroundColor = '#778fb5'
+            btnNext.disabled = false;  // Habilitar el botón "Siguiente"
+            
+        }); 
     });
-
-    total = data.length
 }
+
+// Función para regresar al estado anterior de la selección
+
 /**
  * 
- * @param {Element} respuesta elemento obtenido del html
- * @param {{pregunta: string, opciones: string[], correcta: string}[]} data preguntas del quiz
+ * @param {NodeList[]} botones NodeList de botones para regresar su estado anterior
  */
-// funcion 
-function verSeleccion(respuesta,data){
-    // con el slice se elimina el "A/B/C/D "
-    let respuestaSeleccionada = respuesta.textContent.slice(1,respuesta.length);
-    let respuestaCorrecta = data[contador].correcta
-    console.log(respuestaSeleccionada)
-    
-    // verificar que hay una respuesta seleccionada
-    if(respuesta){
-        btnNext.disabled = false;
-    }
-    // verificar que ha seleccionado la respuesta correcta
-    if(respuestaSeleccionada == respuestaCorrecta){
-        respuesta.style.backgroundColor = '#26D782';
-        puntuacion++;
-        actualizarPuntuacion();
-    } else{
-        respuesta.style.backgroundColor = '#EE5454';
-        /*si se equivocó mostrar cual era la respuesta correcta*/
-       for(let i = 0; i < opcionesBox.children.length; i++){
-            if(opcionesBox.children[i].textContent.slice(1) === respuestaCorrecta){
-                opcionesBox.children[i].style.backgroundColor = '#26D782';
-            } 
-        }
-    }   
 
-    // un ciclo for para desactivar las opciones ya que solo se puede seleccionar una respuesta a la vez
-    for(let i = 0; i < opcionesBox.children.length; i++){
-        opcionesBox.children[i].classList.add('desactivado')
-    }
-    
+function regresarEstado(botones){
+    botones.forEach(boton => {
+        boton.style.backgroundColor = ''
+    });
 }
 
-// funcion para actualizar por cual pregunta va el usuario
+/**
+ * Función que se ejecuta al hacer clic en "Siguiente pregunta"
+ */
+function mostrarResultado() {
+    if (respuestaSeleccionada) {
+        let respuestaSeleccionadaTexto = respuestaSeleccionada.textContent.slice(1);
+        let respuestaCorrecta = preguntas[contador].correcta;
+        
+
+        // Verificar si la respuesta seleccionada es correcta
+        if (respuestaSeleccionadaTexto == respuestaCorrecta) {
+            respuestaSeleccionada.style.backgroundColor = '#26D782';
+            
+            puntuacion++;
+            actualizarPuntuacion();
+        } else {
+            respuestaSeleccionada.style.backgroundColor = '#EE5454';
+            // Mostrar la respuesta correcta
+            for (let i = 0; i < opcionesBox.children.length; i++) {
+                if (opcionesBox.children[i].textContent.slice(1) === respuestaCorrecta) {
+                    opcionesBox.children[i].style.backgroundColor = '#26D782';
+                }
+            }
+        }
+
+        // Desactivar las opciones después de mostrar el resultado
+        for (let i = 0; i < opcionesBox.children.length; i++) {
+            opcionesBox.children[i].classList.add('desactivado');
+        }
+    }
+}
+
+/**
+ * 
+ * @param {number} index Número de pregunta 
+ */
+
+// Función para actualizar por cuál pregunta va el usuario
 function actualizarContador(index){
-    totalText.innerHTML = ` ${index+1} de ${total} preguntas `
+    totalText.innerHTML = ` ${index+1} de ${total} preguntas `;
     bar.style.width = ` ${(index+1)*10}%`;
 }
 
-// funcion para actualizar la puntuacion o cuantas preguntas ha seleccionado correctamente
+// Función para actualizar la puntuación o cuántas preguntas ha seleccionado correctamente
 function actualizarPuntuacion(){
-    const puntuacionText = document.querySelector('.score');
     puntuacionText.textContent = `Puntuación: ${puntuacion} / ${total}`;
 }
+
+

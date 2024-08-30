@@ -1,8 +1,8 @@
 export const dataHtml = [
     {
         pregunta: '¿Cuál es la etiqueta correcta para incluir un archivo CSS externo en un documento HTML?',
-        opciones: ['<style>', '<css>', '<link>', '<stylesheet>'],
-        correcta: '<link>'
+        opciones: ['< style >', '< css >', '< link >', '< stylesheet >'],
+        correcta: '< link >'
     },
     {
         pregunta: '¿Qué atributo de la etiqueta <form> se usa para especificar el método de envío?',
@@ -11,8 +11,8 @@ export const dataHtml = [
     },
     {
         pregunta: '¿Cuál es la etiqueta utilizada para definir una sección de navegación en HTML5?',
-        opciones: ['<nav>', '<navigation>', '<menu>', '<section>'],
-        correcta: '<nav>'
+        opciones: ['< nav >', '< navigation >', '< menu >', '< section >'],
+        correcta: '< nav >'
     },
     {
         pregunta: '¿Cómo se establece un atributo de un elemento en HTML?',
@@ -21,8 +21,8 @@ export const dataHtml = [
     },
     {
         pregunta: '¿Cuál es la etiqueta correcta para definir un área de texto multilínea en un formulario?',
-        opciones: ['<input>', '<textarea>', '<text>', '<field>'],
-        correcta: '<textarea>'
+        opciones: ['< input >', '< textarea >', '< text >', '< field >'],
+        correcta: '< textarea >'
     },
     {
         pregunta: '¿Qué atributo se utiliza para especificar el texto alternativo de una imagen en HTML?',
@@ -41,12 +41,12 @@ export const dataHtml = [
     },
     {
         pregunta: '¿Cómo se define una estructura de documento HTML5 semántico para un artículo de blog?',
-        opciones: ['<article>', '<blog>', '<section>', '<post>'],
-        correcta: '<article>'
+        opciones: ['< article >', '< blog >', '< section >', '< post >'],
+        correcta: '< article >'
     },
     {
         pregunta: '¿Qué etiqueta se utiliza para agrupar un conjunto de controles en un formulario HTML?',
-        opciones: ['<fieldset>', '<group>', '<container>', '<box>'],
-        correcta: '<fieldset>'
+        opciones: ['< fieldset >', '< group >', '< container >', '< box >'],
+        correcta: '< fieldset >'
     }
 ];
